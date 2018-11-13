@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CollabApp", "CollabApp\CollabApp.vcxproj", "{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24} = {C2FC6E32-728C-46D0-834A-B1664DA84E24}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollabLib", "CollabLib\CollabLib.csproj", "{C2FC6E32-728C-46D0-834A-B1664DA84E24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollabWpf", "CollabWpf\CollabWpf.csproj", "{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Debug|x64.ActiveCfg = Debug|x64
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Debug|x64.Build.0 = Debug|x64
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Debug|x86.ActiveCfg = Debug|Win32
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Debug|x86.Build.0 = Debug|Win32
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Release|Any CPU.ActiveCfg = Release|Win32
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Release|x64.ActiveCfg = Release|x64
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Release|x64.Build.0 = Release|x64
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Release|x86.ActiveCfg = Release|Win32
+		{FC2FC827-36E6-42F6-85CF-7F05E6034AE4}.Release|x86.Build.0 = Release|Win32
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Debug|x64.Build.0 = Debug|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Debug|x86.Build.0 = Debug|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Release|x64.ActiveCfg = Release|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Release|x64.Build.0 = Release|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Release|x86.ActiveCfg = Release|Any CPU
+		{C2FC6E32-728C-46D0-834A-B1664DA84E24}.Release|x86.Build.0 = Release|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Debug|x64.Build.0 = Debug|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Debug|x86.Build.0 = Debug|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Release|x64.ActiveCfg = Release|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Release|x64.Build.0 = Release|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Release|x86.ActiveCfg = Release|Any CPU
+		{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CD60C72-E8DA-49C3-A429-9DCE4DE615CA}
+	EndGlobalSection
+EndGlobal
