@@ -11,8 +11,11 @@ namespace CollabWpf
 		public static int CallWpfDlg()
 		{
 			var dlg = new WpfDlg();
-			dlg.ShowDialog();
-			return dlg.ButtonValue;
+			if( dlg.ShowDialog() ?? false )
+			{
+				return dlg.ButtonValue;
+			}
+			return -1;
 		}
 	}
 }

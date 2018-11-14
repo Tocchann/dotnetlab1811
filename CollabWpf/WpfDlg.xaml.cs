@@ -27,7 +27,7 @@ namespace CollabWpf
 		private void Button_Click( object sender, RoutedEventArgs e )
 		{
 			ButtonValue = int.Parse( ((Button)sender).Content.ToString() );
-			Close();	//	どこかのボタンが押されたらウィンドウを閉じる
+			DialogResult = true;
 		}
 	}
 }
