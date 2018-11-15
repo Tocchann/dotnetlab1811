@@ -8,14 +8,16 @@ namespace CollabWpf
 {
 	public class WrapWpf
 	{
-		public static int CallWpfDlg()
+		public int SelectValue { get; private set; }
+		public bool CallDlg()
 		{
 			var dlg = new WpfDlg();
 			if( dlg.ShowDialog() ?? false )
 			{
-				return dlg.ButtonValue;
+				SelectValue = dlg.ButtonValue;
+				return true;
 			}
-			return -1;
+			return false;
 		}
 	}
 }
