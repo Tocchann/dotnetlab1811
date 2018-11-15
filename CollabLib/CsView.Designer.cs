@@ -49,6 +49,7 @@
 			this.Controls.Add(this.label1);
 			this.Name = "CsView";
 			this.Size = new System.Drawing.Size(255, 71);
+			this.SizeChanged += new System.EventHandler(this.CsView_SizeChanged);
 			this.ResumeLayout(false);
 
 		}
