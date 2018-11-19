@@ -34,10 +34,12 @@
 			// 
 			// label1
 			// 
-			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(339, 183);
+			this.label1.Size = new System.Drawing.Size(339, 157);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "C#のコントロール。特に操作はしない。";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
