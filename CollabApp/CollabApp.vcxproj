@@ -240,6 +240,13 @@
     <ProjectReference Include="..\CollabWpf\CollabWpf.csproj">
       <Project>{8123d97a-2cf1-4a32-b4bb-17d352feaa86}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\PipeClientApp\PipeClientApp.csproj">
+      <Project>{49fb4223-c192-49e5-9758-2be4c6507a20}</Project>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
