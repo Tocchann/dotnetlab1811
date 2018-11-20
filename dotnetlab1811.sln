@@ -12,6 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollabLib", "CollabLib\Coll
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollabWpf", "CollabWpf\CollabWpf.csproj", "{8123D97A-2CF1-4A32-B4BB-17D352FEAA86}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93B0E0AF-E64D-4727-B0D7-99067EE9C79E}"
+	ProjectSection(SolutionItems) = preProject
+		plot.md = plot.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
