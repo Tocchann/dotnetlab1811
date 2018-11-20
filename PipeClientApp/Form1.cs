@@ -27,19 +27,32 @@ namespace PipeClientApp
 
 		private void button1_Click( object sender, EventArgs e )
 		{
-			UseWaitCursor = true;
-			//	接続解放で初めて送信になる。。。パイプストリーム再接続したくないんだけどね。。。なぜか。。。orz
-			using( var stream = new NamedPipeClientStream( ".", pipeName, PipeDirection.Out ) )
+			try
 			{
-				stream.Connect();
-				//	サーバーアプリはメッセージモードで開けているので、送信はユニコード文字列をそのまま送ればいい
-				//	バイナリ転送する場合は、バイトモードで開いてバイナリデータ転送になる。今回は違うのでそのまま。
-				using( var writer = new StreamWriter( stream, Encoding.Unicode ) )
+				UseWaitCursor = true;
+				//	送信時だけパイプ接続する。
+				using( var stream = new NamedPipeClientStream( ".", pipeName, PipeDirection.Out ) )
 				{
-					writer.Write( textBox1.Text );
+					stream.Connect( 2 * 1000 );
+					//	サーバーアプリはメッセージモードで開けているので、送信はユニコード文字列をそのまま送ればいい
+					//	バイナリ転送する場合は、バイトモードで開いてバイナリデータ転送になる。今回は違うのでそのまま。
+					using( var writer = new StreamWriter( stream, Encoding.Unicode ) )
+					{
+						writer.Write( textBox1.Text );
+					}
 				}
 			}
-			UseWaitCursor = false;
+			catch( Exception exp )
+			{
+				MessageBox.Show( $"送信できませんでした。サーバーが動作しているか確認してください。\n{exp.Message}", "PipeClientApp", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+				//	送信できないので送信ボタンを強制的に無効化
+				pipeName = "";
+				button1.Enabled = false;
+			}
+			finally
+			{
+				UseWaitCursor = false;
+			}
 		}
 		private void button2_Click( object sender, EventArgs e )
 		{
