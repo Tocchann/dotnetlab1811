@@ -6,13 +6,14 @@
 Microsoft MVP for Development Technologies  
 Twitter <http://twitter.com/tocchann>  
 Facebook <https://www.facebook.com/toshiyuki.takahagi>  
-blog <http://blogs.wankuma.com/tocchann/default.aspx>
+blog <http://blogs.wankuma.com/tocchann/default.aspx>  
+GitHub <https://github.com/tocchann/>
 
 ---
 
 ## 参考URL
 
-* この資料は以下のリンクから参照できます。ソースコードはご自由にお使いください。
+* この資料は以下のリンクから参照できます。
   * <https://github.com/tocchann/dotnetlab1811/>
 * リファレンス：C++/CLI (Visual C++) による .NET プログラミング
   * <https://docs.microsoft.com/ja-jp/cpp/dotnet/>
@@ -20,23 +21,20 @@ blog <http://blogs.wankuma.com/tocchann/default.aspx>
 ## アジェンダ
 
 * C++ プログラムと .NET プログラムの連携パターン
-* ここだけの話...
-* C++ アプリの .NET 対応
-* .NET 側の準備
-* C++ から、.NET Framework のクラスメソッドを呼び出す。
-* MFCのCWinFormsView を使って内部にウィンドウを張り付ける。
-* Native アプリと .NET アプリのプロセス間連携を行う。
+* C++/CLI に関連するプロジェクトの種類
+* .NET オブジェクトとの連携
+* 本当の意味で考えるべきこと
 
 ## C++ プログラムと .NET プログラムの連携パターン
 
-### 互いに別プロセスで呼び出す
+#### 互いに別プロセスで呼び出す
 
 * プロセス間通信(IPC)を使うことで実現
   * 既存プログラムの変更範囲は IPC 機能の追加だけ
   * IPCを選べばマシン間の連携も可能
 * プロセス割り当て分のメモリをすべて利用可能
 
-### .exe が .NET Framework 製
+#### .exe が .NET Framework 製
 
 * よく目にする 一部に C/C++ を使いたいパターン
 * プラットフォーム呼び出し(P/Invoke)する
@@ -45,7 +43,7 @@ blog <http://blogs.wankuma.com/tocchann/default.aspx>
   * 呼び出したいのがLIBの場合
   * APIの直接呼出しが難しい場合
 
-### .exe が C++ プログラム製
+#### .exe が C++ プログラム製
 
 * .NET を独自にホスティングする
   * インストールされているランタイムを動的判断してホスト可能
@@ -57,7 +55,25 @@ blog <http://blogs.wankuma.com/tocchann/default.aspx>
     * CListView 的な実装も可能
   * ポップアップウィンドウならWPFなども直接利用可能
 
-## C++/CLI で注意しておくべき点
+## C++/CLI に関連するプロジェクトの種類
+
+* 既存アプリに /clr オプションを追加
+  * すでにあるアプリに .NET の機能を追加したいならこれ！
+* CLR クラス ライブラリ
+  * LIBのラップDLLを新たに作るなどの場合に選択
+* 一応あるほかの選択肢
+  * CLR コンソール アプリケーション
+  * 空の CLR プロジェクト
+
+#### 既存 C++ アプリの .NET 対応
+
+* C++/CLI の機能も普通に使える
+  * オブジェクトの作成は gcnew を使う
+  * 文字列の受け渡しも昔よりはずっと簡単に！
+* MFC アプリなら
+  * 子ウィンドウとしてUIを張り付け可能
+
+#### C++/CLI で注意しておくべき点
 
 * デフォルトスレッドモデルはMTA
   * メイン関数が CLI の場合の話
@@ -70,25 +86,7 @@ blog <http://blogs.wankuma.com/tocchann/default.aspx>
     * めったに発生しないだけでNativeDLLにも潜在的に存在する
   * 外部変数のコンストラクタ呼び出しで発生する
 
-## C++/CLI に関連するプロジェクトの種類
-
-* 既存アプリに /clr オプションを追加
-  * すでにあるアプリに .NET の機能を追加したいならこれ！
-* CLR クラス ライブラリ
-  * LIBのラップDLLを新たに作るなどの場合に選択
-* 一応あるほかの選択肢
-  * CLR コンソール アプリケーション
-  * 空の CLR プロジェクト
-
-## 既存 C++ アプリの .NET 対応
-
-* C++/CLI の機能も普通に使える
-  * オブジェクトの作成は gcnew を使う
-  * 文字列の受け渡しも昔よりはずっと簡単に！
-* MFC アプリなら
-  * 子ウィンドウとしてUIを張り付け可能
-
-## /clr スイッチを使う場合の注意事項
+#### /clr スイッチを使う場合の注意事項
 
 * ランタイム(MFCを含む)はDLLのみ利用可能
   * /MD オプションにする
@@ -103,7 +101,9 @@ blog <http://blogs.wankuma.com/tocchann/default.aspx>
   * 省略時は v4.0 相当になる
   * 利用する .NET DLL のビルドバージョンに合わせる
 
-## クラスライブラリの呼び出し
+## .NET オブジェクトとの連携
+
+#### クラスライブラリの呼び出し
 
 * 通常のコンポーネントとして呼び出し可能
   * メソッド呼び出し、プロパティ呼び出しもそのまま可能
@@ -111,7 +111,7 @@ blog <http://blogs.wankuma.com/tocchann/default.aspx>
 * 文字列は互換性がないのでコンバートが必要
   * msclr/marshal*.h の msclr::interop::marshal_as\<T> を使う
 
-## 画面コンポーネントのサポート
+#### 画面コンポーネントのサポート
 
 * MFC 側のサポートは3種類
   * 指定できるクラスは System.Windows.Forms.Control の派生クラス
@@ -142,9 +142,9 @@ blog <http://blogs.wankuma.com/tocchann/default.aspx>
 * PipeClientApp
   * 名前付きパイプによるプロセス間通信アプリサンプル
 
-## まとめ？
+## 本当の意味で考えるべきこと
 
-* トップレベルのフレームウィンドウがNativeであることの功罪はある
-* HTMLよりも動き始めてしまえば動作は高速
-* モーダルなウィンドウなら、WPFも簡単に利用可能
-* 内部処理だけ .NET お任せという形も取れる。
+* MFC アプリからの脱却
+* Windows 10 エコシステム
+* .NET Core
+* C++/WinRT
