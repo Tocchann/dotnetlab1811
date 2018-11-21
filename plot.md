@@ -1,9 +1,20 @@
 # Native アプリと .NET アプリを連動するいくつかの方法
 
+---
+
+高萩 俊行（とっちゃん)  
+Microsoft MVP for Development Technologies  
+Twitter <http://twitter.com/tocchann>  
+Facebook <https://www.facebook.com/toshiyuki.takahagi>  
+blog <http://blogs.wankuma.com/tocchann/default.aspx>
+
+---
+
 ## 参考URL
 
-* <https://github.com/tocchann/dotnetlab1811/>
-* [C++/CLI (Visual C++) による .NET プログラミング](https://docs.microsoft.com/ja-jp/cpp/dotnet/dotnet-programming-with-cpp-cli-visual-cpp?view=vs-2017)
+* この資料は以下のリンクから参照できます。ソースコードはご自由にお使いください。
+  * <https://github.com/tocchann/dotnetlab1811/>
+* リファレンス：C++/CLI (Visual C++) による .NET プログラミング
   * <https://docs.microsoft.com/ja-jp/cpp/dotnet/>
 
 ## アジェンダ
@@ -18,91 +29,122 @@
 
 ## C++ プログラムと .NET プログラムの連携パターン
 
-* .exe が .NET Framework 製
-  * C++/CLI のDLLを作成する
-    * LIBの場合
-    * COM 呼び出しのラップ
-  * プラットフォーム呼び出し(P/Invoke)する
-    * API 呼び出しのようなパターン
-  * よくある話なので今日はパス！
-* .exe が C++ プログラム製
-  * .NET を独自にホスティングする
-    * インストールされているランタイムを動的判断してホスト可能
-    * 既存環境をいじれないインストーラ専用と思ったほうがいい
-  * /clr オプションをつける
-    * 既存アプリで、部分的に .NET の機能を利用する場合に使う
-    * プロジェクトオプションでターゲットバージョンを指定
-    　* VC++14.0(VS2015) から可能
-* 互いに別プロセスで呼び出す
-  * プロセス間通信(IPC)を使うことで実現
-  * 直接送受信できるプロトコルはそれほど多くない
-  * 既存プログラムの変更範囲は IPC 機能の追加だけ
+### 互いに別プロセスで呼び出す
 
-## ここだけの話
+* プロセス間通信(IPC)を使うことで実現
+  * 既存プログラムの変更範囲は IPC 機能の追加だけ
+  * IPCを選べばマシン間の連携も可能
+* プロセス割り当て分のメモリをすべて利用可能
+
+### .exe が .NET Framework 製
+
+* よく目にする 一部に C/C++ を使いたいパターン
+* プラットフォーム呼び出し(P/Invoke)する
+  * API 呼び出しと同じように呼び出す
+* C++/CLI のDLLを作成する
+  * 呼び出したいのがLIBの場合
+  * APIの直接呼出しが難しい場合
+
+### .exe が C++ プログラム製
+
+* .NET を独自にホスティングする
+  * インストールされているランタイムを動的判断してホスト可能
+  * 既存環境をいじれないインストーラ専用
+* /clr オプションをつける
+  * 既存アプリに部分的な .NET 機能を取り込む
+  * MFCアプリなら、CView 部分を Forms.Control に差し替え可能
+    * CHtmlView, CFormView ライクな実装。
+    * CListView 的な実装も可能
+  * ポップアップウィンドウならWPFなども直接利用可能
+
+## C++/CLI で注意しておくべき点
 
 * デフォルトスレッドモデルはMTA
   * メイン関数が CLI の場合の話
-  * COM の多くは、STA前提
-* LIB のCLI化はリンク先のプロジェクトをCLIにしないと意味がない
-  * CLRオプションはプロジェクトの設定なので使う側も必要
+  * COM の多くは STA 前提
+  * Native のメイン関数の場合COMは初期化されない
+* LIB のCLI化はリンク先のプロジェクトもCLIに！
+  * CLRオプションはプロジェクトの設定
 * DLL の初期化の注意点
-  * ローダーロック問題に対応が必要
-  * めったに発生しないだけでNativeDLLでも起こりえる問題
-  * 外部変数はコンストラクタのないものだけにする
-* 「空の CLR プロジェクト」から始める
-  * 設計を見直しましょう！
-  * C++/CLI がなければ配布が少し楽になります！
-    * .NET Core に C++/CLI のようなものない！
+  * ローダーロック
+    * めったに発生しないだけでNativeDLLにも潜在的に存在する
+  * 外部変数のコンストラクタ呼び出しで発生する
 
-## C++ アプリの .NET 対応
+## C++/CLI に関連するプロジェクトの種類
 
-* 新規に C++/CLI アプリを作りたい！
-  * たとえコンソールでもC#を使うことをお勧め。
-  * 話題の .NET Core に、C++/CLI 相当はない！
-  * C++/CLI は、配布するランタイムが一つ増える
-    * VC++ ランタイムは、プリインストールされていない
-* 既存の C++ アプリから .NET の機能を使いたい！
-  * C++/CLI の機能で普通に使える
-    * gcnew NetCls(); で構築が可能！
-    * 文字列の受け渡しも昔よりは簡単になった！
-  * MFC アプリの場合
-    * 子ウィンドウとしてUIを張り付け可能
-    * クラスライブラリレベルのサポートがある
-  * ATL(WTL) アプリの場合
-    * 非UI部分のみサポート(CStringなどなど)
+* 既存アプリに /clr オプションを追加
+  * すでにあるアプリに .NET の機能を追加したいならこれ！
+* CLR クラス ライブラリ
+  * LIBのラップDLLを新たに作るなどの場合に選択
+* 一応あるほかの選択肢
+  * CLR コンソール アプリケーション
+  * 空の CLR プロジェクト
 
-## C++ アプリに .NET の機能を追加しよう
+## 既存 C++ アプリの .NET 対応
 
-* C++/CLI にプロジェクトを変換する
-  * /MD オプションに切り替える
-  * 文字コードをUNICODEにする
-  * エディットコンティニューをOFFにする
-    * ここまではVS2017のデフォルト
-  * EXEの /clr スイッチの有効化
-  * TargetVersion を指定する
+* C++/CLI の機能も普通に使える
+  * オブジェクトの作成は gcnew を使う
+  * 文字列の受け渡しも昔よりはずっと簡単に！
+* MFC アプリなら
+  * 子ウィンドウとしてUIを張り付け可能
+
+## /clr スイッチを使う場合の注意事項
+
+* ランタイム(MFCを含む)はDLLのみ利用可能
+  * /MD オプションにする
+    * VS2017ではデフォルト
+* 文字コードをUNICODEにする
+  * VS2017ではデフォルト
+* エディットコンティニューをOFFにする
+  * VS2017ではデフォルト
+* EXEの /clr スイッチの有効化
+  * 自分で設定
+* TargetVersion を指定する
+  * 省略時は v4.0 相当になる
+  * 利用する .NET DLL のビルドバージョンに合わせる
 
 ## クラスライブラリの呼び出し
 
 * 通常のコンポーネントとして呼び出し可能
   * メソッド呼び出し、プロパティ呼び出しもそのまま可能
-
-
+  * 何も足さない。何もひかない。
+* 文字列は互換性がないのでコンバートが必要
+  * msclr/marshal*.h の msclr::interop::marshal_as\<T> を使う
 
 ## 画面コンポーネントのサポート
 
 * MFC 側のサポートは3種類
+  * 指定できるクラスは System.Windows.Forms.Control の派生クラス
+    * WPF を張り付ける場合、ElementHost 派生クラスを経由
   * CWinFormsView
-    * 画面全体にユーザーコントロールを張り付けるような形で利用
-  * CWinFormsControl\<TManagedControl>
-    * ボタンなどと同じようにコントロールコンポーネントとして部分的に利用
+    * CFormView/CHtmlView ライクな使い方が可能
+    * サンプルで利用
+    * DataGridViewなどを指定すれば CListView ライクに
   * CWinFormsDialog\<TManagedControl>
-    * ダイアログリソース代わりに利用
-* .NET 側は System.Windows.Forms.Control の派生クラスを定義
-  * WPF を張り付ける場合、ElementHost 派生クラスを経由する
+    * CDHtmlDialogライクな使い方が可能
+  * CWinFormsControl\<TManagedControl>
+    * CWinFormsViewの下請け実装
+    * コントロールとして直接貼り付ける場合に利用
 
-## DEMO 構成
+## サンプルプロジェクトの構造
 
-* CWinFormsView を張り付けた例
-* クラスオブジェクトの作成とメソッド・プロパティアクセス
-* 名前付きパイプを使ったプロセス間通信
-* 文字列データの受け渡し
+* CollabApp
+  * Managed/Unmanaged 混在のEXE
+  * CMainFrame/CCollabAppDoc は、.NET を使っていないのでNativeのまま
+  * 独自の .NET アクセス部分は CollabAppView に局所化
+* CollabLib
+  * Windows Forms プロジェクト
+  * View 用のユーザーコントロールを定義
+* CollabWpf
+  * WPF プロジェクト
+  * ダイアログ表示代わりに使うWPFウィンドウを定義
+  * 呼び出し部分をあえて分離するための間接参照クラスを用意
+* PipeClientApp
+  * 名前付きパイプによるプロセス間通信アプリサンプル
+
+## まとめ？
+
+* トップレベルのフレームウィンドウがNativeであることの功罪はある
+* HTMLよりも動き始めてしまえば動作は高速
+* モーダルなウィンドウなら、WPFも簡単に利用可能
+* 内部処理だけ .NET お任せという形も取れる。
