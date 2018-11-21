@@ -25,7 +25,7 @@ GitHub <https://github.com/tocchann/>
 * .NET オブジェクトとの連携
 * 本当の意味で考えるべきこと
 
-## C++ プログラムと .NET プログラムの連携パターン
+### C++ プログラムと .NET プログラムの連携パターン
 
 #### 互いに別プロセスで呼び出す
 
@@ -55,7 +55,7 @@ GitHub <https://github.com/tocchann/>
     * CListView 的な実装も可能
   * ポップアップウィンドウならWPFなども直接利用可能
 
-## C++/CLI に関連するプロジェクトの種類
+### C++/CLI に関連するプロジェクトの種類
 
 * 既存アプリに /clr オプションを追加
   * すでにあるアプリに .NET の機能を追加したいならこれ！
@@ -101,7 +101,7 @@ GitHub <https://github.com/tocchann/>
   * 省略時は v4.0 相当になる
   * 利用する .NET DLL のビルドバージョンに合わせる
 
-## .NET オブジェクトとの連携
+### .NET オブジェクトとの連携
 
 #### クラスライブラリの呼び出し
 
@@ -126,7 +126,7 @@ GitHub <https://github.com/tocchann/>
     * CWinFormsViewの下請け実装
     * コントロールとして直接貼り付ける場合に利用
 
-## サンプルプロジェクトの構造
+### サンプルプロジェクトの構造
 
 * CollabApp
   * Managed/Unmanaged 混在のEXE
@@ -142,7 +142,7 @@ GitHub <https://github.com/tocchann/>
 * PipeClientApp
   * 名前付きパイプによるプロセス間通信アプリサンプル
 
-## 本当の意味で考えるべきこと
+### 本当の意味で考えるべきこと
 
 * MFC アプリからの脱却
 * Windows 10 エコシステム
