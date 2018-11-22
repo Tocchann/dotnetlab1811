@@ -67,18 +67,21 @@
 			// button2
 			// 
 			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.button2.Location = new System.Drawing.Point(612, 31);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(113, 23);
 			this.button2.TabIndex = 3;
-			this.button2.Text = "キャンセル";
+			this.button2.Text = "終了";
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// Form1
 			// 
+			this.AcceptButton = this.button1;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.button2;
 			this.ClientSize = new System.Drawing.Size(737, 61);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);

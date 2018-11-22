@@ -31,13 +31,7 @@
 		<Button Grid.Row="3" Grid.Column="0" Content="*" Click="Button_Click" />
 		<Button Grid.Row="3" Grid.Column="1" Content="0" Click="Button_Click" />
 		<Button Grid.Row="3" Grid.Column="2" Content="#" Click="Button_Click" />
-		<Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-			<TextBlock Grid.Column="0" Name="TelNumber" FontSize="36" VerticalAlignment="Center"/>
-			<Button Grid.Column="1" Content="Enter" Click="EnterButton_Click" />
-		</Grid>
+		<TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" FontSize="36" VerticalAlignment="Center" Name="Data" />
+		<Button Grid.Row="4"  Grid.Column="2" Content="Enter" Click="EnterButton_Click" />
 	</Grid>
 </Window>

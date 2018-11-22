@@ -8,13 +8,13 @@ namespace CollabWpf
 {
 	public class WrapWpf
 	{
-		public string TelNumber { get; private set; }
+		public string Text { get; private set; }
 		public bool CallDlg()
 		{
 			var dlg = new WpfDlg();
 			if( dlg.ShowDialog() ?? false )
 			{
-				TelNumber = dlg.TelePhone;
+				Text = dlg.Text;
 				return true;
 			}
 			return false;

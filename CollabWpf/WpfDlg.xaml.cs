@@ -12,15 +12,15 @@ namespace CollabWpf
 		{
 			InitializeComponent();
 		}
-		public string TelePhone { get; set; }
+		public string Text { get; set; }
 		private void Button_Click( object sender, RoutedEventArgs e )
 		{
-			TelNumber.Text += ((Button)sender).Content.ToString();
+			Data.Text += ((Button)sender).Content.ToString();
 		}
 
 		private void EnterButton_Click( object sender, RoutedEventArgs e )
 		{
-			TelePhone = TelNumber.Text;
+			Text = Data.Text;
 			DialogResult = true;
 		}
 	}

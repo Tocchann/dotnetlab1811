@@ -15,6 +15,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93B0E0AF-E64D-4727-B0D7-99067EE9C79E}"
 	ProjectSection(SolutionItems) = preProject
 		plot.md = plot.md
+		Session.md = Session.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipeClientApp", "PipeClientApp\PipeClientApp.csproj", "{49FB4223-C192-49E5-9758-2BE4C6507A20}"
