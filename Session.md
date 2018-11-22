@@ -6,27 +6,27 @@
 [blog <http://blogs.wankuma.com/tocchann/default.aspx>](http://blogs.wankuma.com/tocchann/default.aspx)  
 [GitHub <https://github.com/tocchann/>](https://github.com/tocchann/)
 
-# アジェンダ
+## アジェンダ
 
-* [はじめに](a1)
-* [WPF を利用した簡単な例](a2)
-* [CWinFormsView を利用した簡単な例](a3)
-* [パイプを使ったプロセス間通信の例](a4)
-* [おわりに](a5)
+* はじめに
+* WPF を利用した簡単な例
+* CWinFormsView を利用した簡単な例
+* パイプを使ったプロセス間通信の例
+* おわりに
 
-## <a name="a1">はじめに</a>
+## はじめに
 
 C++ アプリと .NET Framework の連携機能から比較的単純なものをいくつか紹介します。
 
-* [WPF を利用した簡単な例](a1)
-* [CWinFormsView を利用した簡単な例](^2)
-* [パイプを使ったプロセス間通信の例](a3)
+* WPF を利用した簡単な例
+* CWinFormsView を利用した簡単な例
+* パイプを使ったプロセス間通信の例
 
 今回は、MFC アプリから .NET Framework の様々な機能を呼び出すための足掛かりとなるサンプルとしています。
 
-## <a name="a2">WPF を利用した簡単な例</a>
+## WPF を利用した簡単な例
 
-### 仕様
+仕様
 
 * ホストプロセス側にWPFの参照を持たせない
 * クラスオブジェクト呼び出し例も兼ねる
@@ -56,9 +56,9 @@ if( wrapWpf->CallDlg() )
 }
 ```
 
-## <a name="a3">CWinFormsView を利用した簡単な例</a>
+## CWinFormsView を利用した簡単な例
 
-### 仕様
+仕様
 
 * MVC スタイルで作る
   * M=CDocument(C++)
@@ -92,7 +92,7 @@ auto pView = dynamic_cast<CollabLib::CsView^>(GetControl());
 pView->AddMsg( FromString( pDoc->GetPipeMessage() ) );
 ```
 
-#### MFC は互換性を優先するところがある
+### MFC は互換性を優先するところがある
 
 * MFC の .NET サポートは WinForms のみ
 * mfcmifc80.dll に IView などのインターフェース定義がある(インターフェース定義DLL)
@@ -100,15 +100,15 @@ pView->AddMsg( FromString( pDoc->GetPipeMessage() ) );
   * WinForms でできる範囲はほとんどが C++ ベースでもできてしまう
 * どうせ作るなら WPF 版を作ったほうがずっと効果的
 
-#### WPF を張り付けることはできるの？
+### WPF を張り付けることはできるの？
 
 * [WPF と Win32 の相互運用性](https://docs.microsoft.com/ja-jp/dotnet/framework/wpf/advanced/wpf-and-win32-interoperation)
 
 HWND と WPF ウィンドウの連動(それぞれを子ウィンドウとして貼る)相互運用方法が出ています。この仕組み、残念ながら MFC/ATL にはポーティングされていません(そのまま利用は可能)。
 
-## <a name="a4">パイプを使ったプロセス間通信の例</a>
+## パイプを使ったプロセス間通信の例
 
-### 仕様
+仕様
 
 * .NET で実装したほうが良いという部分をプロセス分離させて処理する事例として用意する。
 * 実装難易度は気にしないことにする
@@ -132,21 +132,21 @@ C++側受信部
 DWORD sendLength;
 DWORD readed;
 auto result = pipe.Read( &sendLength, sizeof( sendLength ), readed );
-if( CheckError( this, result, readed ) )
+if( !CheckResult( result, readed ) )
 {
-break;
+    break;
 }
 result = pipe.Read( buffer, sendLength, readed );
-if( CheckError( this, result, readed ) )
+if( !CheckResult( result, readed ) )
 {
-break;
+    break;
 }
 buffer[sendLength/sizeof(wchar_t)] = L'\0';
 ```
 
-## <a name="a5">おわりに</a>
+## おわりに
 
-## 既存 C++ アプリの .NET 対応
+### 既存 C++ アプリの .NET 対応
 
 * .NET オブジェクトの作成は gcnew を使う
 * .NET クラスを作る場合は ref class
@@ -188,8 +188,7 @@ buffer[sendLength/sizeof(wchar_t)] = L'\0';
   * 省略時は v4.0 相当になる
   * 利用する .NET DLL のビルドバージョンに合わせる
 
-
-#### まとめ？
+### まとめ？
 
 * .NET Core の場合は C# を使います。C++ は使えません。
 * UWP アプリの場合は C++/CX を使います。
@@ -200,4 +199,3 @@ buffer[sendLength/sizeof(wchar_t)] = L'\0';
 * .NET 連携部分は極力疎結合に！
 * COM を使うというもっとべたな方法もある
 
-最後にこれだけは。。。「スレッドモデルを意識しましょう！」
