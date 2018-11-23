@@ -1,6 +1,7 @@
 # Native アプリと .NET アプリを連動するいくつかの方法
 
-高萩 俊行（とっちゃん) Microsoft MVP for Development Technologies  
+高萩 俊行（とっちゃん) Microsoft MVP for Development Technologies
+
 [Twitter http://twitter.com/tocchann](http://twitter.com/tocchann)  
 [Facebook https://www.facebook.com/toshiyuki.takahagi](https://www.facebook.com/toshiyuki.takahagi)  
 [blog http://blogs.wankuma.com/tocchann/default.aspx](http://blogs.wankuma.com/tocchann/default.aspx)  
