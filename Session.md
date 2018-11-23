@@ -151,7 +151,7 @@ buffer[sendLength/sizeof(wchar_t)] = L'\0';
 * .NET オブジェクトの作成は gcnew を使う
 * .NET クラスを作る場合は ref class
 * .NET オブジェクトはハンドルで持つ(System::Object^)
-* 変換かな？と思ったら vcclr.h と msclr\*.h をチェック
+* 変換かな？と思ったら vcclr.h と msclr\\*.h をチェック
 
 ### C++/CLI 新規プロジェクトの種類
 
