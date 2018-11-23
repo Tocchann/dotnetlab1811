@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.IO.Pipes;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -59,12 +50,12 @@ namespace PipeClientApp
 #if keep_connect
 			if( pipeStream != null )
 			{
-				using( pipeStream )
-				{
-					pipeStream.Close();
-				}
+				pipeStream.Close();
+				pipeStream.Dispose();
+				pipeStream = null;
 			}
 #endif
+			cts.Dispose();
 		}
 		private async void button1_Click( object sender, EventArgs e )
 		{
