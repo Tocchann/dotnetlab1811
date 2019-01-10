@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 
 namespace CollabWpf
 {
@@ -22,6 +25,13 @@ namespace CollabWpf
 		{
 			Text = Data.Text;
 			DialogResult = true;
+		}
+		public bool? ShowDialog( IntPtr hwndOwner )
+		{
+			Debug.Assert( hwndOwner != IntPtr.Zero );
+			var helper = new WindowInteropHelper( this );
+			helper.Owner = hwndOwner;
+			return ShowDialog();
 		}
 	}
 }
