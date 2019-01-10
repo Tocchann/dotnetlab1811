@@ -1,10 +1,11 @@
 # Native アプリと .NET アプリを連動するいくつかの方法
 
-高萩 俊行（とっちゃん) Microsoft MVP for Development Technologies  
-[Twitter <http://twitter.com/tocchann>](http://twitter.com/tocchann)  
-[Facebook <https://www.facebook.com/toshiyuki.takahagi>](https://www.facebook.com/toshiyuki.takahagi)  
-[blog <http://blogs.wankuma.com/tocchann/default.aspx>](http://blogs.wankuma.com/tocchann/default.aspx)  
-[GitHub <https://github.com/tocchann/>](https://github.com/tocchann/)
+高萩 俊行（とっちゃん) Microsoft MVP for Development Technologies
+
+[Twitter http://twitter.com/tocchann](http://twitter.com/tocchann)  
+[Facebook https://www.facebook.com/toshiyuki.takahagi](https://www.facebook.com/toshiyuki.takahagi)  
+[blog http://blogs.wankuma.com/tocchann/default.aspx](http://blogs.wankuma.com/tocchann/default.aspx)  
+[GitHub https://github.com/tocchann/](https://github.com/tocchann/)
 
 ## アジェンダ
 
@@ -151,7 +152,7 @@ buffer[sendLength/sizeof(wchar_t)] = L'\0';
 * .NET オブジェクトの作成は gcnew を使う
 * .NET クラスを作る場合は ref class
 * .NET オブジェクトはハンドルで持つ(System::Object^)
-* 変換かな？と思ったら vcclr.h と msclr\*.h をチェック
+* 変換かな？と思ったら vcclr.h と msclr\\*.h をチェック
 
 ### C++/CLI 新規プロジェクトの種類
 
